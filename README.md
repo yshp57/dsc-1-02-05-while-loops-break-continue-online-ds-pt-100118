@@ -1,32 +1,183 @@
-# Object Orientation
 
-## Overview
+# While Loops, Break and Continue
 
-We'll introduce the concept of Object Oriented Programming (OOP)
+## Introduction
+After writing enough for loops to fill a novel where the next line is a an `if` statement, we must be asking ourselves if there is a better way? Or asking ourselves if there is a way to have a loop **without** a collection to iterate over? Well, this is where **while** loops come into play. We can use a while loop to perform the same action over and over until a condition is met. We don't even need an *iterable* or collection to iterate over. We can just define a condition an perform the while block until the condition is met. Pretty cool, right? 
 
-## Object-Oriented Programming (OOP)
+In this lesson, we are going to talk about the `break` and `continue` statements in Python. Sometimes we will want to perform operations using a for loop on **almost** every element in a collection, or only certain elements, or only one element. Whatever the case may be, we can see that we'll need to be able to add some *flow control* to our iteration process with for loops. `break` and `continue` can help us do just that. We'll look at exactly how these statements work and when is a good opportunity to employ these.
 
-*An object-oriented approach to application development makes programs more intuitive to design, faster to develop, more amenable to modification, and easier to understand.*  
-—[*Object-Oriented Programming with Objective-C*][apple_oop_guide_intro], Apple Inc.
+## Objectives
+* Use a break and continue statements inside a loop
+* Understand, explain and use while loops
 
-[apple_oop_guide_intro]: https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/OOP_ObjC/Introduction/Introduction.html#//apple_ref/doc/uid/TP40005149-CH1-SW2
+## What Are `break` and `continue` Statements?
 
-It's natural to wonder, "how can a string of ones and zeroes be referred to as an 'object'?" The use of the word "object" is an abstraction of thought. An "object" in code has no more physical form than does a word in any human language. Sure, words have physical representations: speaking a word causes air to vibrate in a sound wave, ink on a page can be shaped into symbols that represent the word, a meaning can be pointed at or mimed out; but none of these are the word itself. Human language is a system of abstraction: it communicates the *idea* of a thing, but not the thing itself.
+In this case, it is almost best to not overthink it too much. `break` and `continue` essentially do what they sound like. They are used in tandem with conditional statements (`if`, `elif`) inside loops, and they *break* out of a loop if a condition is met or *continue* a loop if a different condition is met. Before we dive too deep into how these statements function, let's look at an example.
 
-![](https://upload.wikimedia.org/wikipedia/en/b/b9/MagrittePipe.jpg)  
-Translation: "This is not a pipe." - [*The Treachery of Images*](https://en.wikipedia.org/wiki/The_Treachery_of_Images), [René Magritte](https://en.wikipedia.org/wiki/Ren%C3%A9_Magritte), 1927  
 
-This image of a pipe is no more a pipe than the word "pipe" is a pipe; in the same way, a code object named `pipe` is not a pipe, but only another form of representing a pipe.
+```python
+numbers = list(range(0,30))
+new_list = []
+for num in numbers:
+    if len(new_list) > 4:
+        print(f"We have enough even numbers in new_list ({len(new_list)}). break will stop the for loop now")
+        break
+    elif num % 2 == 0:
+        new_list.append(num)
+    elif num % 2 != 0:
+        continue
+        print("i never get executed")
+    print(num, "is even.")
+    print("this does not print for odd numbers\nbecause the continue statement skips\nthe code that follows in the for loop\nand goes straight back to the next element in the for loop")
+    
+```
 
->As humans, we’re constantly faced with myriad facts and impressions that we must make sense of. To do so, we must abstract underlying structure away from surface details and discover the fundamental relations at work. Abstractions reveal causes and effects, expose patterns and frameworks, and separate what’s important from what’s not. Object orientation provides an abstraction of the data on which you operate; moreover, it provides a concrete grouping between the data and the operations you can perform with the data—in effect giving the data behavior.  
->—[*Object-Oriented Programming with Objective-C*](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/OOP_ObjC/Articles/ooOOP.html#//apple_ref/doc/uid/TP40005149-CH8-SW3), Apple Inc.
+Okay, so, let's unpack what's happening here. 
 
-A code object representing a water pipe (instead of a smoking pipe) might contain values for `length`, `diameter`, `material`, and `manufacturer`. The bundling of these individual pieces of information together begins to form a larger whole.
+First, we have a for loop that is iterating over our list, `numbers`, which has 30 numbers in it. Then we see that we have an if statement that only executes it's code when our `new_list` has more than 4 numbers in it. Once this condition is met, we **break** out of our loop. We then have an `elif` statement that adds any even number to the `new_list`, and a final `elif` statement that tests to see if the number is odd, and if it is odd, then it **continue**s to the next element in our for loop's iteration process. 
 
-Object-Oriented Programming, however, does more than just bundle up individual pieces of data that represent a "thing" — it also bundles customized functions that can be performed *on* that data. These are called **methods**: behaviors that an object performs upon its internal data and even upon other code objects.
+So, first let's dig into the `continue` statement. `continue` is telling our loop to **skip** any code that comes after it and go straight to the next element in our loop. So, if we are dealing with number `1` in our list of numbers, we will hit our `continue` statement and immediately go to the next element in our for loop (i.e. `2`). Any code that comes after the `continue` will **not** be executed, **but** our for loop does **not** end execution. This contrasts with the `break` statement. Our break statement is only executed when we have met our condition that the `new_list` has reached the number of elements we want it to have. Once the `break` statement is executed, it will end the execution of the for loop altogether. All code after the `break` statement will be ignored, similar to our `continue`, but there will be no next step to the iteration. It stops the loop and that's the end.
 
-An object in code is a thing with all the data and all the logic required to complete a task. Objects are models and metaphors for the problems we solve in code.
+So, essentially, we can use `continue` to *skip* operation on elements and code below the continue. We can then use `break` when we have a condition that tells us we want to stop the process altogether.
 
-Object-oriented programming was born from the trend of making digital lives reflect our real lives. In the 1970's, [Adele Goldberg](https://en.wikipedia.org/wiki/Adele_Goldberg_%28computer_scientist%29) and [Alan Kay](https://en.wikipedia.org/wiki/Alan_Kay) developed an object-oriented language at Xerox PARC called SmallTalk, which was used in the first personal computer.
+We can look at two examples to really reinforce this difference in execution.
 
-Python comes with a few types of Objects to get us started, things like `int` for Integer, `str` for String, `list` for List, etc. We call these base types of Objects "Primitives." But what if we wanted to create a new type in our programming universe, a new kind of object for our code? That's what the `class` keyword and object orientation allows us to do.
+
+```python
+for i in list(range(0,5)):
+    if True:
+        print(i)
+    print("Since we don't have a continue statement,\nI'll always get executed")
+```
+
+
+```python
+for i in list(range(0,5)):
+    if True:
+        print(i)
+        continue
+    print("I'll never get executed")
+```
+
+
+```python
+for i in list(range(0,5)):
+    if True:
+        print(i)
+        break
+    print("I'll never get executed either")
+```
+
+These examples are a bit contrived but they very clearly show how `continue` and `break` work inside loops and conditional statements as well as the difference between their execution.
+
+## Identify Opportunities to Use Break and Continue
+
+Let's say you have a collection of things that you want to filter out elements and create a new list with the elements you want. But you also want to perform a complex operation on each of the elements you **do** want. Well, you don't want to perform that operation on the elements that you don't want and you don't want to have to perform multiple for loops on the collection. So, a `continue` statement would allow you to optimize your performance and avoid needing to perform those operations. And a `break` statement can be used when we want to put a limit on the number of iterations we perform, the number of elements we append to a new list, or even just stop our iteration when we have found the first element we want. Let's take a look:
+
+
+```python
+names = ["aNNE", "JaNe", "willIAM", "WanDA", "WeSt", "HELEN", "tHoMaS", "HENrY", "John", "Marshall", "May"]
+formatted_names = []
+check_count = 0
+
+for name in names:
+    if name.startswith('w') or name.startswith("W"):
+        check_count += 1
+        continue
+    elif len(formatted_names) >= 4:
+        check_count += 1
+        break
+    else:
+        formatted_names.append(name.title())
+
+print("before", names)
+print("after", formatted_names)
+print(check_count)
+```
+
+Okay, so, as we can tell from our code. We wanted to create a list of 4 names that are properly formatted and that **don't** start with the letter `w`. To optimize our code, we first check to see if the name starts with `w`. If it does, we skip all other operations that we need to do and go to the next name. Next we check to see if we have hit our quota of 4 names. If we have, then stop the iteration altogether. Lastly, if neither condition is met, format the given name and append it to our new list of formatted names.
+This way, we are optimizing our code by making sure that we eliminate performing any operations that aren't absolutely necessary at each step. You may have noticed the variable, `check_count`. If you are feeling unconvinced that the break and continue are not cutting down on the amount of times our code is executing, run the cell below and compare the `check_count`s, which increment after **each** check of a conditional statement.
+
+
+```python
+names = ["aNNE", "JaNe", "willIAM", "WanDA", "WeSt", "HELEN", "tHoMaS", "HENrY", "John", "Marshall", "May"]
+formatted_names = []
+check_count = 0
+
+for name in names:
+    formatted_name = ""
+    if len(formatted_names) < 4:
+        check_count += 1
+        if not name.startswith('w') or not name.startswith("W"):
+            check_count += 1
+            formatted_names.append(name.title())
+            
+
+print("before", names)
+print("after", formatted_names)        
+print(check_count)
+```
+
+See that?! We have cut down on the different checks we perform by one half (50%)! And on top of that, to get the same result we have to have a **nested** if statement, which is, technically put, ***gross***. All joking aside, nested if statements should be avoided if they can be since they make our code less readable and therefore harder to maintain ontop of being half as efficient as our previous code.
+
+It's imperative to note that these excess checks could represent much more expensive operations in our code. So, it is important to try and use `break` and `continue` when it makes sense.
+
+## What is a `while` loop and how does it work?
+
+A while loop is just that; a loop! Similar to a for loop, except there is no need for a collection to iterate over. Instead, a while loop uses a condition to know when to stop executing. When the condition is true, the block inside the while loop is executed. When that condition is false, we exit the while loop and move on to the next piece of our code.
+
+Let's look at an example:
+
+
+```python
+stop_number = 4
+while stop_number > 0:
+    print(stop_number)
+    stop_number -=1
+print("The stop_number reached", stop_number, "so the while loop's condition became False and stopped execution")
+```
+
+Note the lack of a `list` or other collection, and that our second print statement only printed after our stop_number become 0.
+
+Also, notice that the structure of a while loop is such that it could execute for an *unkown* amount of times. For example, if we didn't know the stop_number because it changed from time to time, our while loop could execute more 100 times or 3. 
+
+For example, if we used a random number:
+
+
+```python
+import random
+random_num = random.randint(1,20)
+while random_num > 0:
+    random_num -= 1
+    print(random_num)
+```
+
+However, we know that eventually that number will be less than 0 and the loop will eventually stop. This is of critical importance. A while loop must always have a condition that will stop the loop, otherwise we will have an **infinite** loop. Infinite loops can crash your browser or program, if you don't have a way to end it, so, it is very important to make sure your loops have a fairly defined **end** case.
+
+*If you do ever accidentally create an infinite loop, don't worry. Your current tab or browser might freeze, and then kill the page to stop the execution. You can then re-open the browser again normally.*
+
+## When To Use While Loops
+
+While loops are fairly straight forward. We use them in instances where we have a **condition** that serves as the point at which we want a process to stop. For example, if we think about our apetite, we should eat until we aren't hungry, right? Some days that might be two slices of pizza, some days that might be 5 slices of pizza (and that is assumes all pizza slices to be of equal size, which is a *generous* assumption).
+
+![liz_lemon_eating_pizza](liz_lemon_eating_pizza.gif)
+
+In keeping with our food theme, let's see how we can make sure we're drinking enough water during the day using a while loop:
+
+
+```python
+hydration = 0
+water = 1 # in gallons
+while hydration < 100 and water > 0:
+    print('----[sips water]-----')
+    water -= .1
+    print('ah, that was refreshing')
+    hydration += 10
+    print("hydration is now at", hydration, "%\n")
+```
+
+## Summary
+
+In this lesson, we introduced some *control flow* statements, `break` and `continue`, which allow us to make our conditional statements and the rest of our code more efficient and more readable. We call these statements flow control statements because they allow us to *control* the *flow* of our code's execution. 
+
+Awesome! While loops are great, right? We can use them to perform operations based on the truthiness of a condition instead of needing to iterate over the elements in a collection. They provide a more dynamic way to perform an operations, but we need to be careful when writing while loops because we need there to be a condition that ends the loop. Otherwise we will have an **infinite** loop which will give us and our computer a real headache.
