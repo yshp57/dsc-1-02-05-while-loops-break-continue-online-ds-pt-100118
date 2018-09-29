@@ -2,10 +2,13 @@
 # While Loops, Break and Continue
 
 ## Introduction
-After writing seemingly endless for loops to iterate over collections or just perform an operation for a given amount of iterations, we must be asking ourselves if there is a better way? Or asking ourselves if there is a way to have a loop **without** a collection to iterate over? Well, another way to create a loop is with **while** loops. We can use a while loop to perform the same action over and over until a condition is no longer `True`. We don't even need an *iterable* or collection to iterate over. We can just define a condition and perform the given code block until the condition is no longer `True`. Pretty cool, right?   
+
+Earlier in the course, we learned hot to iterate over collections. But is there is a way to have a loop **without** a collection to iterate over? Well, another way to create a loop is with **while** loops. We can use a while loop to perform the same action over and over until a condition is no longer `True`. We don't even need an *iterable* or collection to iterate over. We can just define a condition and perform the given code block until the condition is no longer `True`. Pretty cool, right?   
+
 Or what if we would like to have a loop that stops at a certain point? Let's say we only want to collect half of the elements of a list, or stop a list once we find the first matching element? To perform operations like these we'll need `break` and `continue` statements. These statements **control the flow** of our loops and will help us make our loops even more effective.
 
 ## Objectives
+You will be able to:
 * Use a break and continue statements inside a loop
 * Understand, explain and use while loops
 
@@ -41,7 +44,7 @@ while random_num > 0:
 
 However, we know that eventually that number will be less than 0 and the loop will eventually stop. This is of critical importance. A while loop must always have a condition that will stop the loop, otherwise we will have an **infinite** loop. Infinite loops can crash your browser or program, if you don't have a way to end it, so, it is very important to make sure your loops have a fairly defined **end** case.
 
-*If you do ever accidentally create an infinite loop, don't worry. Your current tab or browser might freeze, and then kill the page to stop the execution. You can then re-open the browser again normally.*
+*If you do ever accidentally create an infinite loop, don't worry. Your current Notebook might freeze, and then kill the page to stop the execution. You can then re-open the browser again normally.*
 
 ## When To Use While Loops
 
@@ -171,9 +174,9 @@ print("after", formatted_names)
 print(check_count)
 ```
 
-See that?! We have cut down on the different checks we perform by one half (50%)! And on top of that, to get the same result we have to have a **nested** if statement, which is, technically put, ***gross***. All joking aside, nested if statements should be avoided if they can be since they make our code less readable and therefore harder to maintain ontop of being half as efficient as our previous code.
+See that?! We have cut down on the different checks we perform by half (50%)! And on top of that, to get the same result we have to have a **nested** if statement, which is, technically put, ***gross***. All joking aside, nested `if` statements should be avoided if they can be since they make our code less readable and therefore harder to maintain ontop of being half as efficient as our previous code.
 
-It's imperative to note that these excess checks could represent much more expensive operations in our code. So, it is important to try and use `break` and `continue` when it makes sense.
+It's important to note that these excess checks could represent much more expensive operations in our code. So, it is important to try and use `break` and `continue` when it makes sense.
 
 ## Summary
 
